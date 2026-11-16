@@ -1,0 +1,1547 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>IDN Sport Center - Integrated Sports &amp; Wellness</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Smooth scroll & modern transitions */
+html { scroll-behavior: smooth; }
+
+/* Micro animations */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float-gentle {
+  animation: floatGentle 3.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.08); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+/* Scroll reveal classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Modal styling */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(19, 27, 46, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-box {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35);
+  transform: scale(0.92) translateY(24px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.open .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Mobile drawer navigation */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background-color: rgba(19, 27, 46, 0.5);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.mobile-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 82%;
+  max-width: 340px;
+  background: #ffffff;
+  z-index: 9991;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+.mobile-drawer-overlay.open .mobile-drawer {
+  transform: translateX(0);
+}
+
+/* Toast alert notification */
+#toast-notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  z-index: 10000;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  pointer-events: none;
+}
+#toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Active navigation pill & filter transition */
+.filter-card-item {
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.filter-card-hidden {
+  opacity: 0 !important;
+  transform: scale(0.85) !important;
+  pointer-events: none !important;
+  display: none !important;
+}
+
+/* Hover ripple & elevation */
+.card-interactive {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+.card-interactive:hover {
+  transform: translateY(-6px);
+}
+
+
+/* ==================== COMPLETE DARK & LIGHT MODE STYLES ==================== */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark {
+  color-scheme: dark;
+  background-color: #0b1329 !important;
+}
+
+html.dark body {
+  background-color: #0b1329 !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark main {
+  background-color: #0b1329 !important;
+}
+
+html.dark header {
+  background-color: rgba(11, 19, 41, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark .bg-surface,
+html.dark section.bg-surface {
+  background-color: #0b1329 !important;
+}
+
+html.dark .bg-surface-container-lowest {
+  background-color: #111a33 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .bg-surface-container-low {
+  background-color: #16203d !important;
+}
+
+html.dark .bg-surface-container {
+  background-color: #1d2a4f !important;
+}
+
+html.dark .bg-surface-container-high {
+  background-color: #24335e !important;
+}
+
+html.dark .bg-surface-container-highest {
+  background-color: #2b3d70 !important;
+}
+
+html.dark .text-on-surface {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-on-surface-variant {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-primary {
+  color: #60a5fa !important;
+}
+
+html.dark .text-secondary {
+  color: #38bdf8 !important;
+}
+
+html.dark footer {
+  background-color: #070d1e !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #16203d !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+html.dark .modal-box,
+html.dark .mobile-drawer {
+  background-color: #111a33 !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+html.dark .border-outline-variant,
+html.dark .border-outline-variant\/30,
+html.dark .border-outline-variant\/40 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Modal dark text & background overrides */
+html.dark .modal-box .text-on-surface {
+  color: #f1f5f9 !important;
+}
+html.dark .modal-box .text-on-surface-variant {
+  color: #94a3b8 !important;
+}
+html.dark .modal-box .bg-surface-container-low {
+  background-color: #16203d !important;
+}
+html.dark .modal-box .bg-surface-container {
+  background-color: #1d2a4f !important;
+}
+html.dark .modal-box .bg-surface-container-lowest {
+  background-color: #0d152a !important;
+}
+
+/* Dark mode toggle icon switching */
+html.dark .dark\:hidden {
+  display: none !important;
+}
+html.dark .dark\:block {
+  display: block !important;
+}
+html:not(.dark) .dark\:hidden {
+  display: block !important;
+}
+html:not(.dark) .dark\:block {
+  display: none !important;
+}
+
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error-container":"#93000a","surface-container":"#eaedff","surface-container-highest":"#dae2fd","on-secondary-container":"#004d6a","on-secondary":"#ffffff","secondary-container":"#40c2fd","secondary-fixed-dim":"#7bd0ff","inverse-primary":"#b1c5ff","on-primary":"#ffffff","tertiary":"#00457f","inverse-surface":"#283044","secondary-fixed":"#c4e7ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-primary-fixed-variant":"#00409f","on-background":"#131b2e","primary":"#003f9b","surface":"#faf8ff","outline":"#737785","tertiary-fixed":"#d4e3ff","surface-container-high":"#e2e7ff","surface-bright":"#faf8ff","on-error":"#ffffff","on-tertiary-fixed-variant":"#004883","surface-tint":"#1357ca","on-tertiary-container":"#bdd6ff","on-secondary-fixed":"#001e2c","surface-variant":"#dae2fd","primary-container":"#0d55c8","primary-fixed":"#dae2ff","surface-container-lowest":"#ffffff","inverse-on-surface":"#eef0ff","on-primary-fixed":"#001847","tertiary-container":"#005da8","on-secondary-fixed-variant":"#004c69","on-surface-variant":"#434653","error-container":"#ffdad6","on-primary-container":"#c7d4ff","secondary":"#00668a","primary-fixed-dim":"#b1c5ff","surface-container-low":"#f2f3ff","on-tertiary-fixed":"#001c39","tertiary-fixed-dim":"#a4c9ff","on-surface":"#131b2e","outline-variant":"#c3c6d6","background":"#faf8ff","surface-dim":"#d2d9f4"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"margin":"2.5rem","space-xs":"0.25rem","space-xl":"2.5rem","space-sm":"0.5rem","space-lg":"1.5rem","space-md":"1rem","gutter-mobile":"1rem","margin-mobile":"1rem","gutter":"1.5rem"},fontFamily:{"headline-lg-mobile":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"caption":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"]},fontSize:{"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.03em",fontWeight:"800"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"800"}],"title-md":["16px",{lineHeight:"24px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"22px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"26px",fontWeight:"400"}],"caption":["11px",{lineHeight:"14px",letterSpacing:"0.03em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}]}}}};</script>
+<script>
+// Apply saved theme immediately before render
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+})();
+</script>
+
+</head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1280px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md"><a href="#hero" class="flex items-center gap-space-sm cursor-pointer group transition-transform hover:scale-105 duration-200"><div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white p-1.5 shadow-sm border border-outline-variant/30 group-hover:scale-105 transition-all"><img src="idn-logo.png" alt="IDN Logo" class="w-full h-full object-contain"></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">IDN SPORT</span><span class="font-caption text-caption text-secondary uppercase tracking-widest font-semibold">Center</span></div></a><nav class="hidden lg:flex items-center gap-space-sm" id="desktop-nav" data-active-classes="bg-surface-container text-primary font-bold rounded-lg">
+<a aria-current="page" class="nav-link px-space-md py-space-sm transition-all bg-surface-container text-primary font-bold rounded-lg" data-section="hero" href="#hero">Beranda</a>
+<a class="nav-link px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:text-on-surface hover:bg-surface-container-low transition-all" data-section="tentang-kami" href="#tentang-kami">Tentang Kami</a>
+<a class="nav-link px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:text-on-surface hover:bg-surface-container-low transition-all" data-section="fasilitas-dan-layanan" href="#fasilitas-dan-layanan">Fasilitas &amp; Layanan</a>
+<a class="nav-link px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:text-on-surface hover:bg-surface-container-low transition-all" data-section="berita" href="#berita">Berita</a>
+<a class="nav-link px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:text-on-surface hover:bg-surface-container-low transition-all" data-section="kontak" href="#kontak">Kontak</a>
+</nav><div class="flex items-center gap-space-sm sm:gap-space-md">
+<button onclick="openModal('modal-login')" class="hidden sm:inline-flex items-center font-label-lg text-label-lg text-primary hover:text-primary-container transition-colors px-space-sm py-space-xs cursor-pointer">Masuk</button>
+<button onclick="openModal('modal-booking')" class="inline-flex items-center justify-center px-space-md sm:px-space-lg py-space-sm rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-sm hover:bg-primary hover:shadow transition-all duration-200 cursor-pointer active:scale-95">Booking Lapangan</button>
+<button aria-label="Toggle Dark/Light Mode" onclick="toggleTheme()" class="w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all flex items-center justify-center shadow-sm focus:outline-none cursor-pointer"><span class="material-symbols-outlined text-lg block dark:hidden">dark_mode</span><span class="material-symbols-outlined text-lg hidden dark:block text-secondary-container">light_mode</span></button>
+<button aria-label="Open Mobile Menu" onclick="openMobileMenu()" class="lg:hidden w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all flex items-center justify-center shadow-sm focus:outline-none cursor-pointer"><span class="material-symbols-outlined text-xl">menu</span></button>
+<div class="hidden sm:flex items-center ml-space-xs cursor-pointer" onclick="openModal('modal-login')" title="Profil Santri / Anggota"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida/ALJJyrDBFJt6UM0i5J4I1yL_KBWVyq_BCk0E96JMQvsLlIbCFjjI1Fi0XzNG4yt4cPk2wX4v-MIuSmuA_cFbEaX1_w2l3bWhIWoTZ1RSUBMUs2w9i24fMqWLo4ypQvHTYMze6tubUElMQv_sB2efHDtpyypC4TsxR2zH5uGAYs-VEVcDTwwD06fzFCciygiWqchzlAEghFN064nB-a4Nnm4Wo9BkyfgJTZPi3QLmh1kqALMrpl06Vc6GWqSCIwM"></div>
+</div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section id="hero" class="relative w-full overflow-hidden bg-surface-container-lowest -mt-20 pt-28 pb-16 lg:pt-36 lg:pb-24">
+<!-- Atmospheric Ambient Glows -->
+<div class="absolute -top-24 right-0 w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-3xl pointer-events-none -z-0"></div>
+<div class="absolute top-1/2 left-[-150px] w-[450px] h-[450px] bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none -z-0"></div>
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Left Column: Typography & CTAs -->
+<div class="lg:col-span-7 flex flex-col items-start">
+<div class="inline-flex items-center gap-2 px-space-md py-1.5 rounded-full bg-surface-container text-primary font-label-md text-label-md mb-space-md shadow-sm"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span>IDN Boarding School Sport Area • Jonggol, Bogor</span></div>
+<h1 class="font-display-lg text-display-lg-mobile lg:text-display-lg text-on-surface font-extrabold tracking-tight mb-space-md leading-[1.12]">IDN Boarding School <span class="text-primary-container">Sport Area</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-space-xl leading-relaxed">Platform aktivitas olahraga dalam lingkungan IDN Boarding School berbasis prinsip pesantren dan teknologi informasi di Jonggol, Bogor. Mendukung perkembangan fisik, mental, dan karakter santri.</p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-space-md w-full sm:w-auto">
+<button onclick="openModal('modal-booking')" class="inline-flex items-center justify-center gap-space-sm px-space-xl py-3.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer">
+<span>Sewa Lapangan Sekarang</span>
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+</button>
+<a class="inline-flex items-center justify-center gap-space-sm px-space-lg py-3.5 rounded-xl bg-surface-container-low text-primary font-label-lg text-label-lg hover:bg-surface-container hover:shadow-sm transition-all duration-200 cursor-pointer active:scale-95" href="#fasilitas-dan-layanan">
+<span class="material-symbols-outlined text-primary text-xl">play_circle</span>
+<span>Jelajahi Fasilitas</span>
+</a>
+</div>
+<!-- Hero Metrics Bar -->
+<div class="mt-space-xl pt-space-lg grid grid-cols-3 gap-space-md w-full max-w-xl bg-surface-container-low/70 backdrop-blur-sm rounded-2xl p-space-md shadow-sm border border-outline-variant/30">
+<div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary font-bold counter-value" data-target="15" data-suffix="+">15+</span><span class="font-label-md text-label-md text-on-surface-variant">Achievement</span></div>
+<div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary font-bold counter-value" data-target="6" data-suffix=" Arena">6 Arena</span><span class="font-label-md text-label-md text-on-surface-variant">Sport Field</span></div>
+<div class="flex flex-col"><span class="font-headline-md text-headline-md text-secondary font-bold counter-value" data-target="500" data-suffix="+">500+</span><span class="font-label-md text-label-md text-on-surface-variant">Member Santri</span></div>
+</div>
+</div>
+<!-- Right Column: Visual Arena Showcase -->
+<div class="lg:col-span-5 relative">
+<div class="relative rounded-3xl overflow-hidden shadow-2xl bg-surface-container-high aspect-[4/3] lg:aspect-[5/4]">
+<img class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700 ease-out" data-alt="Vast high-ceiling indoor multi-sport arena at IDN Sport Center with polished hardwood maple basketball courts, professional badminton nets, digital overhead scoreboards, spectator tiers, athletic club logo, natural upper windows, dynamic wide angle photography in bright royal blue and crisp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJI6Jg8qnnnf9PAvJQCqwGn5zWtkpc-mNFyGaYAcN7VU3CAEtoKImwApLpbLm5trPq6YRrw6EXINGOdfK61f_hJBwTo_lrLVTzP4TIaaLF9sd4bQngJ-YiVyW-k4-EC_iGCyXXTALVic-c0SfC1ypI91yAvIOZh8JQo9KVortUDMoOHKCtvPQO6JoRInOJrjL6b654RGO05h2fCFAcqoNw3j7Tp3qBOqjsoY2jhRI">
+<!-- Gradient Scrim -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+<!-- Floating Badge 1: Status -->
+
+<!-- Floating Accent Card Bottom -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/95 backdrop-blur-xl p-space-md rounded-2xl shadow-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined">sports_basketball</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface leading-tight">Lapangan Ukuran Standar</h4>
+<p class="font-caption text-caption text-on-surface-variant">Lantai Kayu &amp; Lapisan Peredam Benturan</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-primary font-caption text-caption font-bold">Grade A</span>
+</div>
+</div>
+<!-- Secondary Decorative Badge Overlap -->
+<div class="hidden sm:flex absolute -bottom-6 -left-6 bg-surface-container-lowest p-space-sm rounded-2xl shadow-xl items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">100% Standar Resmi</p>
+<p class="font-caption text-caption text-on-surface-variant">Sesuai Ukuran &amp; Standar Resmi Olahraga</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: TENTANG KAMI (ABOUT US) -->
+<section class="w-full py-space-xl bg-surface" id="tentang-kami">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col items-center text-center mb-space-xl reveal">
+<span class="px-space-md py-1 rounded-full bg-surface-container text-secondary font-label-md text-label-md uppercase tracking-wider font-bold mb-space-xs">
+          TENTANG IDN SPORT CENTER
+        </span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface font-extrabold max-w-2xl leading-tight">Apa itu IDN Boarding School Sports Area?</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<!-- Story & Highlights (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg reveal-left">
+<div class="p-space-lg rounded-3xl bg-surface-container-lowest shadow-sm"><p class="font-body-lg text-body-lg text-on-surface leading-relaxed mb-space-md"><strong>IDN Boarding School Sports Club</strong> adalah platform kegiatan olahraga di lingkungan IDN Boarding School yang berlokasi di Jonggol, Bogor.</p><p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Dirancang untuk mendukung pembinaan fisik, mental, dan karakter santri secara terstruktur dan kompetitif dengan fasilitas modern, lapangan standar resmi, serta integrasi nilai adab dan disiplin islami.</p></div>
+<!-- 3 Key Strengths Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs hover:bg-surface-container transition-colors">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">workspace_premium</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold mt-1">Standar Kejuaraan</h3>
+<p class="font-caption text-caption text-on-surface-variant leading-normal">Lantai maple interlock, rumput sintetis kualitas standar turnamen, dan pencahayaan LED anti-glare 750 lux.</p>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs hover:bg-surface-container transition-colors">
+<div class="w-10 h-10 rounded-xl bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">sports</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold mt-1">Pelatih Profesional</h3>
+<p class="font-caption text-caption text-on-surface-variant leading-normal">
+                Akademi futsal, basket, bulutangkis, dan fitness bersama pelatih berlisensi nasional resmi.
+              </p>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs hover:bg-surface-container transition-colors">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">clean_hands</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold mt-1">Higienis &amp; Ramah</h3>
+<p class="font-caption text-caption text-on-surface-variant leading-normal">
+                Loker modern, shower air hangat, musholla nyaman, kantin sehat, dan recovery studio.
+              </p>
+</div>
+</div>
+</div>
+<!-- Supporting Photo (5 Cols) -->
+<div class="lg:col-span-5 reveal-right">
+<div class="relative rounded-3xl overflow-hidden shadow-lg bg-surface-container aspect-square">
+<img class="w-full h-full object-cover" data-alt="Female coach guiding young athletes through agility drills with resistance bands on an indoor court at IDN Sport Center, bright sunlit expansive windows, climbing wall and modern gym mezzanine in the background, candid sports photography with royal blue athletic uniforms" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhRWThOsROczVF03cWhGgHIdbKSUQOio6uT3D6VlBY5E68vg3m9rcSEYvzlNl0JiilPbaBE09bmO_pFxvsogOqceBOEPUdZsDRRBo4jB6idkvAiUJx7HL4dtwK8A5jQ-o61PcqQ5hg6AWqPb9G7teTBZAM8V4D5DTT1oJsE-VlWchkjy8Qkw72ZD7hpLr2f6a-1wQFkoRmE8s_G8Mj3xEWf8C6wmN1zwMfsWzG4a8">
+<div class="absolute bottom-4 left-4 right-4 p-space-md rounded-2xl bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold">Pembinaan Karakter Atlet</span>
+<span class="font-caption text-caption text-surface-container-highest">Disiplin, Sportivitas, &amp; Akhlak Mulia</span>
+</div>
+<span class="material-symbols-outlined text-secondary-container">military_tech</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: FASILITAS & LAYANAN UNGGULAN -->
+<section class="w-full py-space-xl bg-surface-container-low" id="fasilitas-dan-layanan">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
+<div>
+<span class="px-space-md py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md uppercase tracking-wider font-bold mb-space-xs inline-block">
+            ARENA &amp; PROGRAM
+          </span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface font-extrabold">
+            Fasilitas &amp; Layanan Unggulan
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-xl">Cabang olahraga dan kegiatan ekstrakurikuler santri IDN Boarding School Jonggol untuk pembinaan fisik, sportivitas, dan prestasi kejuaraan.</p>
+</div>
+<!-- Filter Pill Chips (Visual Simulation) -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1" id="facility-filter-chips">
+<button onclick="filterFacilities('all', this)" class="filter-btn px-4 py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm whitespace-nowrap transition-all duration-200 cursor-pointer">Semua Ekskul</button>
+<button onclick="filterFacilities('klub', this)" class="filter-btn px-4 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container whitespace-nowrap transition-all duration-200 cursor-pointer">Klub Olahraga</button>
+<button onclick="filterFacilities('pembinaan', this)" class="filter-btn px-4 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container whitespace-nowrap transition-all duration-200 cursor-pointer">Pembinaan Fisik</button>
+<button onclick="filterFacilities('turnamen', this)" class="filter-btn px-4 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container whitespace-nowrap transition-all duration-200 cursor-pointer">Turnamen Santri</button>
+</div>
+</div>
+<!-- Grid 6 Service Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter reveal">
+<!-- CARD 1: Basketball & Badminton -->
+<div data-category="klub" class="filter-card-item flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl card-interactive group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Polished maple wood indoor basketball arena with clearly painted court lines, basketball hoop backboards, multi-tiered spectator seating, and high metal truss ceiling at IDN Sport Center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbMqpQ3VKp681sR38JzULTurLPuQGFNOcMsNfS1Yea3mKr7sOE1lueQ9WeHr_je7Rhxd7s3Q-2UjHMYyomT4K0OcG26Zk5x4BFCGhYC7GLLvBv_8rHw_Xo1JweHSKGEBPBQVpavGrRmO8TyBDdGnZYUkuBHCgeqm2JtzYJmOYEJXIWJAFXFV9Am2I6YIz-3kLOd9cb6XOi5mGkqknKdOtHZpjhHdVdmm5iStdKTiA">
+<span class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full text-primary font-label-md text-label-md font-bold">Ukuran Standar Lapangan</span>
+<span class="absolute bottom-3 right-3 bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface px-2.5 py-1 rounded-lg font-caption text-caption">
+              Kapasitas: 300 Orang
+            </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">Basketball Club (#1 Most Popular)</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md flex-1">Aktivitas basket santri paling favorit dengan lapangan standar turnamen, ring peredam getar, dan pembinaan taktik serta kekompakan tim secara intensif.</p>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-low p-space-md rounded-2xl"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">event_repeat</span><div><span class="font-caption text-caption text-on-surface-variant block">Jadwal Rutin</span><span class="font-title-md text-title-md text-primary font-bold">Rabu &amp; Sabtu (Khusus SMK)</span></div></div><button onclick="showActivityModal('basketball')" class="px-space-md py-2 rounded-xl bg-surface-container text-primary font-label-md text-label-md hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"><span>Detail Ekskul</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div>
+</div>
+</div>
+<!-- CARD 2: Futsal Rumput Sintetis -->
+<div data-category="klub" class="filter-card-item flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl card-interactive group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Lapangan Futsal Rumput Sintetis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdgB5rcr3A_T9_Fj05yeVrivmyuAbuZCZ3HunXfuMoXzPFWRz7WLpcPXP_ZrHF8AcjbVtYjM6cAnQju3aVx-D7FSn9sHS4XVIuAHTIgSb1ipAoO3DggX5Hqw-mc6YQL0XArPYosbw3gRN7maigaL7LxyTovwOCjCbXay5WF5wRsLOMvNL7l0lC0TpafhFDjg8rgME4hNUdzgE4rnDRhXheqdGUiKRCSED7ErVyc-0">
+<span class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full text-secondary font-label-md text-label-md font-bold">Rumput Sintetis Ukuran Standar</span>
+<span class="absolute bottom-3 right-3 bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface px-2.5 py-1 rounded-lg font-caption text-caption">
+              2 Lapangan Standard
+            </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">Futsal &amp; Mini Soccer Club (#2)</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md flex-1">Pelatihan dan pertandingan rutin futsal santri di lapangan rumput sintetis berstandar pro lengkap dengan bantalan shock-absorption dan jaring pengaman.</p>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-low p-space-md rounded-2xl"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-base">schedule</span><div><span class="font-caption text-caption text-on-surface-variant block">Jadwal Rutin</span><span class="font-title-md text-title-md text-primary font-bold">Senin &amp; Kamis Sore</span></div></div><button onclick="showActivityModal('futsal')" class="px-space-md py-2 rounded-xl bg-surface-container text-primary font-label-md text-label-md hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"><span>Detail Ekskul</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div>
+</div>
+</div>
+<!-- CARD 3: Fitness & Recovery Hub -->
+<div data-category="klub" class="filter-card-item flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl card-interactive group"><div class="relative h-56 overflow-hidden"><img alt="Badminton Club Santri IDN" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhRWThOsROczVF03cWhGgHIdbKSUQOio6uT3D6VlBY5E68vg3m9rcSEYvzlNl0JiilPbaBE09bmO_pFxvsogOqceBOEPUdZsDRRBo4jB6idkvAiUJx7HL4dtwK8A5jQ-o61PcqQ5hg6AWqPb9G7teTBZAM8V4D5DTT1oJsE-VlWchkjy8Qkw72ZD7hpLr2f6a-1wQFkoRmE8s_G8Mj3xEWf8C6wmN1zwMfsWzG4a8"><span class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full text-tertiary font-label-md text-label-md font-bold">Lapangan Indoor Ukuran Standar</span><span class="absolute bottom-3 right-3 bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface px-2.5 py-1 rounded-lg font-caption text-caption">80+ Santri Aktif</span></div><div class="p-space-lg flex flex-col flex-1"><h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">Badminton Club (#3)</h3><p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md flex-1">Pembinaan teknik bulutangkis santri dari servis, smash, hingga footwork untuk menjaga kebugaran jasmani dan persiapan kejuaraan antar-pesantren.</p><div class="flex items-center justify-between pt-space-sm bg-surface-container-low p-space-md rounded-2xl"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-base">calendar_month</span><div><span class="font-caption text-caption text-on-surface-variant block">Jadwal Ekskul</span><span class="font-title-md text-title-md text-primary font-bold">Rabu &amp; Sabtu Pagi</span></div></div><button onclick="showActivityModal('badminton')" class="px-space-md py-2 rounded-xl bg-surface-container text-primary font-label-md text-label-md hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"><span>Detail Ekskul</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div></div>
+<!-- CARD 4: Akademi Olahraga -->
+<div data-category="pembinaan" class="filter-card-item flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl card-interactive group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Young student athletes training basketball and agility drills with coach indoors on hardwood court at IDN Sport Center, teamwork and energetic coaching atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSSV_MPlznBr7Dn5x1fUGQNsAsoBN4nDyz3ujYdb9xGLdRzNAqmXJkXq0gb99eRCZxYHxUFkxYFIPYDlRfekUxkD3VYEjel7o9UC1OPY7uJ-ILLkaj2c08cSyqZ4k5yFoS99ZcLubNVvBHwo-hiLv2AFXPcq-zt2HsY_9NUeHRjIwB21Ast5sq6NzRKpzYFL2xLHGMn6gm6cYPA2Lh4T-ykgfTRJ8gWOJwIwRrQ38">
+<span class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full text-secondary font-label-md text-label-md font-bold">
+              Youth Development
+            </span>
+<span class="absolute bottom-3 right-3 bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface px-2.5 py-1 rounded-lg font-caption text-caption">
+              Usia 8 - 18 Tahun
+            </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1"><h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">Akademi Olahraga Santri</h3><p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md flex-1">Sekolah pembinaan atlet muda internal santri IDN untuk futsal, basket, panahan, dan renang. Kurikulum terstruktur berbasis sains olahraga dan adab islami.</p><div class="flex items-center justify-between pt-space-sm bg-surface-container-low p-space-md rounded-2xl"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">verified_user</span><div><span class="font-caption text-caption text-on-surface-variant block">Status Ekskul</span><span class="font-title-md text-title-md text-primary font-bold">Program Resmi Santri</span></div></div><button onclick="showActivityModal('akademi')" class="px-space-md py-2 rounded-xl bg-surface-container text-primary font-label-md text-label-md hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"><span>Lihat Kegiatan</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div>
+</div>
+<!-- CARD 5: Sewa Event & Turnamen -->
+<div data-category="turnamen" class="filter-card-item flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl card-interactive group"><div class="relative h-56 bg-surface-container flex flex-col justify-end p-space-md overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-primary via-primary-container to-secondary opacity-90"></div><div class="relative z-10 text-on-primary"><span class="material-symbols-outlined text-4xl mb-1">emoji_events</span><p class="font-headline-sm text-headline-sm font-bold">Turnamen Antar-Santri &amp; Angkatan</p><p class="font-caption text-caption text-primary-fixed">Kompetisi liga futsal, basket, dan bulutangkis berkala IDN</p><div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/20 backdrop-blur-sm text-on-primary font-caption text-caption"><span class="material-symbols-outlined text-xs">handshake</span><span>Terbuka Sparring &amp; Friendly Match Antar-Sekolah</span></div></div></div><div class="p-space-lg flex flex-col flex-1"><h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">Laga &amp; Turnamen Santri</h3><p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md flex-1">Penyelenggaraan kejuaraan olahraga internal antar-kelas dan antar-angkatan santri IDN Boarding School, melatih kepemimpinan, sportivitas, dan solidaritas tim.</p><div class="flex items-center justify-between pt-space-sm bg-surface-container-low p-space-md rounded-2xl"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">trophy</span><div><span class="font-caption text-caption text-on-surface-variant block">Agenda Turnamen</span><span class="font-title-md text-title-md text-primary font-bold">Tiap Semester</span></div></div><button onclick="showActivityModal('turnamen')" class="px-space-md py-2 rounded-xl bg-surface-container text-primary font-label-md text-label-md hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"><span>Lihat Agenda</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div></div>
+<!-- CARD 6: Member & Community Pass -->
+<div data-category="pembinaan" class="filter-card-item flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl card-interactive group"><div class="relative h-56 bg-surface-container flex flex-col justify-end p-space-md overflow-hidden"><div class="absolute inset-0 bg-gradient-to-tr from-secondary-container via-surface-container-highest to-surface-container-low"></div><div class="relative z-10 text-on-surface"><span class="material-symbols-outlined text-4xl text-primary mb-1">groups</span><p class="font-headline-sm text-headline-sm font-bold">Komunitas Olahraga Santri</p><p class="font-caption text-caption text-on-surface-variant">Klub hobi lari, calisthenics, tenis meja, dan bela diri</p></div></div><div class="p-space-lg flex flex-col flex-1"><h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">Klub Hobi &amp; Komunitas Santri</h3><p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md flex-1">Wadah penyaluran bakat dan minat olahraga santri di luar jam belajar formal, didampingi pembina asrama untuk menjaga kebugaran dan kesehatan jasmani.</p><div class="flex items-center justify-between pt-space-sm bg-surface-container-low p-space-md rounded-2xl"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">check_circle</span><div><span class="font-caption text-caption text-on-surface-variant block">Kepesertaan</span><span class="font-title-md text-title-md text-primary font-bold">Terbuka Santri IDN</span></div></div><button onclick="showActivityModal('komunitas')" class="px-space-md py-2 rounded-xl bg-surface-container text-primary font-label-md text-label-md hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"><span>Lihat Kegiatan</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div></div>
+</div>
+</div>
+</section>
+<!-- SECTION: BERITA & ARTIKEL TERKINI -->
+<section class="w-full py-space-xl bg-surface" id="berita">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
+<div>
+<span class="px-space-md py-1 rounded-full bg-surface-container text-secondary font-label-md text-label-md uppercase tracking-wider font-bold mb-space-xs inline-block">
+            UPDATE &amp; WAWASAN
+          </span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface font-extrabold">
+            Kabar &amp; Kegiatan Terbaru
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-xl">
+            Informasi turnamen, tips kebugaran, dan prestasi santri serta komunitas IDN Sport Center.
+          </p>
+</div>
+<button onclick="showToast('Menampilkan semua arsip berita dan kejuaraan IDN Sport Area.')" class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-primary-container font-bold group cursor-pointer">
+<span>Lihat Semua Berita</span>
+<span class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- 3 Article Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter reveal">
+<!-- Artikel 1 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="relative h-52 overflow-hidden">
+<img alt="Turnamen Futsal Antar-Sekolah IDN Cup 2025" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdgB5rcr3A_T9_Fj05yeVrivmyuAbuZCZ3HunXfuMoXzPFWRz7WLpcPXP_ZrHF8AcjbVtYjM6cAnQju3aVx-D7FSn9sHS4XVIuAHTIgSb1ipAoO3DggX5Hqw-mc6YQL0XArPYosbw3gRN7maigaL7LxyTovwOCjCbXay5WF5wRsLOMvNL7l0lC0TpafhFDjg8rgME4hNUdzgE4rnDRhXheqdGUiKRCSED7ErVyc-0">
+<span class="absolute top-3 left-3 bg-primary-container text-on-primary px-3 py-1 rounded-full font-label-md text-label-md font-bold">
+              Turnamen
+            </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1">
+<div class="flex items-center gap-2 text-on-surface-variant font-caption text-caption mb-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>18 Mei 2025</span>
+<span>•</span>
+<span>Kompetisi Regional</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold hover:text-primary transition-colors line-clamp-2">Independence Day Competition: Semarak Turnamen Kemerdekaan Santri</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md line-clamp-3">Kompetisi olahraga internal santri IDN Boarding School memperingati hari kemerdekaan dengan laga futsal, basket, dan ketangkasan fisik penuh sportivitas.</p>
+<div class="mt-auto pt-space-xs">
+<button onclick="showArticleModal('artikel-1')" class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-bold hover:underline cursor-pointer active:scale-95 transition-transform">
+<span>Baca Selengkapnya</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Artikel 2 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="relative h-52 overflow-hidden">
+<img alt="Tips Recovery Otot IDN Sport" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYljHDtahjToap1Q7Rv9z1BFopJSLKazLhcfU7nzucBaoraNr0rkCa6pvOv7JndT60BVArQ8w_SniKspI4O28bCGhqyBE1WEvOzFs2IaX_Lt2igeKSFTJjuwLZnSkBQ2Cyl-sN5KFPANZXev5kuY7hF4OMddm70cpmQv9qisCUS671HERbyHCfbn18seWcEOfj8t8LvxYCnz6QfPLFxTiIOA3GAqv2a7OjAh8EWI8">
+<span class="absolute top-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full font-label-md text-label-md font-bold">
+              Kesehatan
+            </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1">
+<div class="flex items-center gap-2 text-on-surface-variant font-caption text-caption mb-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>12 Mei 2025</span>
+<span>•</span>
+<span>Tips &amp; Edukasi</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold hover:text-primary transition-colors line-clamp-2">Student Group Activities: Menjaga Kebugaran &amp; Karakter Kebersamaan</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md line-clamp-3">Aktivitas pembinaan jasmani berkelompok bagi santri IDN Boarding School guna membentuk ketahanan fisik, kerja sama regu, dan gaya hidup sehat seimbang.</p>
+<div class="mt-auto pt-space-xs">
+<button onclick="showArticleModal('artikel-2')" class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-bold hover:underline cursor-pointer active:scale-95 transition-transform">
+<span>Baca Selengkapnya</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Artikel 3 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="relative h-52 overflow-hidden">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" data-alt="Athletic coach mentoring smiling young female basketball players indoors during training practice, encouraging sportsmanship and character building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEjnjwblIoxp7bzfT_IGA2v0g_9P4_W-96K9rqyIGZBlt3MSBkQ1JGfXsLMuSSMcpQLo7-1aOKzNgZCL-wWya-quuts0Z9dDFY8oCC9NMvi1BESG5bwI-Ps094JTHFE4uIrSxphhIEaQDkdcxO1cx5AXGfchtYtpfINjUtO0dDAbGAnprj5Z0H2sPm9fZ8XXUHV-NdnW9IVagIr0P9tbm3nQeYFVFe2Zsu6Dqb1zo">
+<span class="absolute top-3 left-3 bg-tertiary-container text-on-tertiary px-3 py-1 rounded-full font-label-md text-label-md font-bold">
+              Pembinaan
+            </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1">
+<div class="flex items-center gap-2 text-on-surface-variant font-caption text-caption mb-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>04 Mei 2025</span>
+<span>•</span>
+<span>Akademi Muda</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold hover:text-primary transition-colors line-clamp-2">Pembaruan Fasilitas &amp; Lapangan Baru di Lingkungan IDN Sport Area</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 mb-space-md line-clamp-3">Perluasan sarana olahraga santri IDN Boarding School di Jonggol Bogor untuk mendukung cabang olahraga unggulan serta turnamen antar-angkatan santri.</p>
+<div class="mt-auto pt-space-xs">
+<button onclick="showArticleModal('artikel-3')" class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-bold hover:underline cursor-pointer active:scale-95 transition-transform">
+<span>Baca Selengkapnya</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- SECTION: KONTAK & LOKASI (CONTACT & LOCATION) -->
+<section class="w-full py-space-xl bg-surface-container-lowest" id="kontak">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin">
+<div class="mb-space-xl">
+<span class="px-space-md py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md uppercase tracking-wider font-bold mb-space-xs inline-block">
+          HUBUNGI KAMI
+        </span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface font-extrabold">Hubungi &amp; Kunjungi Kami</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Tanyakan informasi kegiatan santri, pendaftaran klub olahraga, atau kunjungi langsung IDN Sport Area di Jonggol, Bogor.</p>
+</div>
+<!-- 2 Columns Grid: Left Contact + Form, Right Map & Quick Stats -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left: Details & Form (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Contact Detail Chips -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-2xl bg-surface-container-low flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">Alamat Arena</p>
+<p class="font-body-md text-body-md text-on-surface-variant">IDN Boarding School, Jonggol, Bogor, Jawa Barat</p>
+</div>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary text-on-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">WhatsApp / Telepon</p>
+<p class="font-body-md text-body-md text-on-surface-variant">IDN Boarding School, Jonggol, Bogor, Jawa Barat</p>
+</div>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-tertiary text-on-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">Email Resmi</p>
+<p class="font-body-md text-body-md text-on-surface-variant">IDN Boarding School, Jonggol, Bogor, Jawa Barat</p>
+</div>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">Jam Operasional</p>
+<p class="font-body-md text-body-md text-on-surface-variant">IDN Boarding School, Jonggol, Bogor, Jawa Barat</p>
+</div>
+</div>
+</div>
+<!-- Quick Message Form -->
+<div class="p-space-lg rounded-3xl bg-surface-container shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col gap-1"><h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Formulir Tanya Kegiatan &amp; Ajakan Sparring Antar-Sekolah</h3><p class="font-caption text-caption text-on-surface-variant">Terbuka untuk konsultasi kegiatan ekskul, pendaftaran santri, hingga undangan friendly match &amp; sparring partner antar sekolah/pesantren.</p></div>
+<form class="grid grid-cols-1 sm:grid-cols-2 gap-space-md" id="contact-form" onsubmit="handleContactSubmit(event)"><div class="flex flex-col gap-1 sm:col-span-1"><label class="font-label-md text-label-md text-on-surface font-semibold">Nama Lengkap Santri / Wali</label><input class="h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="Contoh: Muhammad Rizky / Wali Santri" required="" type="text"></div><div class="flex flex-col gap-1 sm:col-span-1"><label class="font-label-md text-label-md text-on-surface font-semibold">Nomor WhatsApp / Kontak</label><input class="h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="0812xxxx atau wali@email.com" required="" type="text"></div><div class="flex flex-col gap-1 sm:col-span-2"><label class="font-label-md text-label-md text-on-surface font-semibold">Pilih Minat Ekskul / Topik Pertanyaan</label><select class="h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container"><option>Ajakan Sparring / Friendly Match Futsal Antar-Sekolah</option><option>Ajakan Sparring / Friendly Match Basket Antar-Sekolah</option><option>Ajakan Sparring Badminton Antar-Sekolah</option><option>Undangan Sparring &amp; Friendly Match Cabang Lainnya</option><option>Pendaftaran Ekskul Basketball Club</option><option>Pendaftaran Ekskul Futsal &amp; Mini Soccer</option><option>Pendaftaran Ekskul Badminton Club</option><option>Akademi Olahraga &amp; Pembinaan Prestasi</option><option>Tanya Jadwal &amp; Informasi Umum Kegiatan</option></select></div><div class="flex flex-col gap-1 sm:col-span-2"><label class="font-label-md text-label-md text-on-surface font-semibold">Pesan / Pertanyaan Seputar Kegiatan</label><textarea class="p-space-md rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="Tuliskan nama sekolah/pesantren asal, cabang olahraga, usulan tanggal sparring, atau pertanyaan seputar kegiatan..." required="" rows="4"></textarea></div><div class="sm:col-span-2 flex justify-end"><button class="w-full sm:w-auto px-space-xl py-3 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary transition-all flex items-center justify-center gap-2" type="submit"><span>Kirim Pertanyaan / Ajakan Sparring</span><span class="material-symbols-outlined text-lg">send</span></button></div></form>
+</div>
+</div>
+<!-- Right: Map View & Quick Travel Guide (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="relative rounded-3xl overflow-hidden shadow-lg bg-surface-container-high h-[360px] lg:h-[440px]">
+<!-- Google Maps Static Container -->
+<div class="w-full h-full bg-cover bg-center" data-location="IDN Boarding School Jonggol Bogor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCl6tPWiFS72cv26ooslmPsgUOpdeUoZmPViIiNFSJnMXVYemL_7RbQbaQiLV3gFxy8xnOuYKP2cMBdPP7lUnQNosMSsEtFn5cVZ5nJsWEU87vkpPe5GziWReHD5QT8qsWUx0x3j_YvOky_uyTj2SBhJ3mrYFXnx3-GH1ikOywsQjNin5Xi_SUjRFx2CpgMCSkW70w-M1sqJgMZMwfIuZ2LDqw3DOchtX-mTC9dA3c')"></div>
+<!-- Map Card Overlay -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/95 backdrop-blur-md p-space-md rounded-2xl shadow-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg font-bold text-primary flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base">pin_drop</span> Kawasan IDN Jonggol Bogor</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-caption text-caption font-semibold">Parkir Luas</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Akses asri dan sejuk di kawasan IDN Boarding School Jonggol, Bogor, Jawa Barat.</p>
+<div class="flex items-center gap-space-sm pt-1">
+<a class="font-label-md text-label-md text-primary font-bold hover:underline inline-flex items-center gap-1" href="https://www.google.com/maps/search/?api=1&query=IDN+Boarding+School+Jonggol+Bogor" rel="noopener noreferrer" target="_blank">
+<span>Buka di Google Maps</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Quick Travel Info Cards -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-lg">directions_car</span>
+<span class="font-label-md text-label-md font-bold">Dari Cibubur</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-bold">± 45 Menit</span>
+<span class="font-caption text-caption text-on-surface-variant">Via Jalur Transyogi Bebas Hambatan</span>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-lg">local_parking</span>
+<span class="font-label-md text-label-md font-bold">Kapasitas Parkir</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-bold">150+ Mobil</span>
+<span class="font-caption text-caption text-on-surface-variant">&amp; 300+ Sepeda Motor Aman</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- STATIC BANNER CTA (INFO EKSKUL & SPARRING) - FIXED IN PLACE (NO FLOAT) -->
+<section class="w-full py-space-lg bg-surface border-t border-outline-variant/30">
+  <div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin">
+    <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shrink-0 shadow-md border border-outline-variant/30 overflow-hidden">
+          <img src="idn-logo.png" alt="IDN Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">Info Ekskul &amp; Ajakan Sparring Santri</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-1">Terbuka untuk sparring / friendly match &amp; latihan bersama antar-sekolah atau pesantren.</p>
+        </div>
+      </div>
+      <a class="w-full md:w-auto px-8 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-all text-center whitespace-nowrap shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95" href="https://wa.me/6281234567890?text=Halo%20IDN%20Sport%20Center,%20kami%20dari%20sekolah/pesantren%20ingin%20mengajak%20sparring%20atau%20info%20ekskul" rel="noopener noreferrer" target="_blank">
+        <span class="material-symbols-outlined text-lg">chat</span>
+        <span>WhatsApp Info &amp; Sparring</span>
+      </a>
+    </div>
+  </div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low"><div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter"><div class="lg:col-span-4 flex flex-col gap-space-md"><div class="flex items-center gap-space-sm"><div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white p-1.5 shadow-sm border border-outline-variant/30"><img src="idn-logo.png" alt="IDN Logo" class="w-full h-full object-contain"></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">IDN SPORT</span><span class="font-caption text-caption text-secondary uppercase tracking-widest font-semibold">Center</span></div></div><p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Pusat Olahraga &amp; Kebugaran Terpadu Berstandar Internasional. Menyediakan arena kompetisi, pelatihan terpadu, dan fasilitas kebugaran premium untuk semua kalangan.</p><div class="flex items-center gap-space-sm pt-space-xs"><a aria-label="Instagram" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center justify-center" href="https://www.instagram.com/idnboardingschool/"><span class="material-symbols-outlined">photo_camera</span></a><a aria-label="YouTube" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center justify-center" href="https://www.youtube.com/@IDNBoardingSchoolOfficial"><span class="material-symbols-outlined">smart_display</span></a><a aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center justify-center" href="https://wa.me/6281234567890?text=Halo%20IDN%20Sport%20Center,%20saya%20ingin%20bertanya%20informasi"><span class="material-symbols-outlined">chat</span></a></div></div><div class="lg:col-span-3 flex flex-col gap-space-md"><span class="font-title-md text-title-md text-on-surface">Tautan Cepat</span><div class="flex flex-col gap-space-sm"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#hero">Beranda</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#tentang-kami">Tentang Kami</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#fasilitas-dan-layanan">Fasilitas &amp; Layanan</a><button onclick="showActivityModal('turnamen')" class="text-left font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Jadwal Pertandingan</button><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#berita">Berita Terkini</a></div></div><div class="lg:col-span-5 flex flex-col gap-space-md"><span class="font-title-md text-title-md text-on-surface">Kontak &amp; Informasi</span><div class="flex flex-col gap-space-md"><div class="flex items-start gap-space-sm"><span class="material-symbols-outlined text-primary mt-0.5">location_on</span><span class="font-body-md text-body-md text-on-surface-variant">IDN Boarding School, Jonggol, Bogor, Jawa Barat</span></div><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary">phone</span><span class="font-body-md text-body-md text-on-surface-variant">+62 (21) 8899-2345 / 0812-3456-7890</span></div><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary">mail</span><span class="font-body-md text-body-md text-on-surface-variant">info@idnsportcenter.id</span></div><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary">schedule</span><span class="font-body-md text-body-md text-on-surface-variant">Setiap Hari: 06:00 - 23:00 WIB</span></div></div></div></div><div class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md"><p class="font-caption text-caption text-on-surface-variant text-center sm:text-left">© 2025 IDN Boarding School Sport Area. All rights reserved.</p><div class="flex items-center gap-space-lg font-caption text-caption text-on-surface-variant"><button onclick="openModal('modal-privasi')" class="hover:text-primary transition-colors cursor-pointer">Kebijakan Privasi</button><button onclick="openModal('modal-syarat')" class="hover:text-primary transition-colors cursor-pointer">Syarat &amp; Ketentuan</button><a class="hover:text-primary transition-colors" href="#kontak">Bantuan</a></div></div></div></footer>
+
+
+<!-- ==================== MOBILE DRAWER MENU ==================== -->
+<div id="mobile-drawer-overlay" class="mobile-drawer-overlay" onclick="closeMobileMenu()">
+  <div class="mobile-drawer p-6" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between pb-6 border-b border-outline-variant/40">
+      <div class="flex items-center gap-space-sm">
+        <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white p-1.5 shadow-sm border border-outline-variant/30">
+          <img src="idn-logo.png" alt="IDN Logo" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-headline-sm text-primary font-bold leading-none">IDN SPORT</span>
+          <span class="font-caption text-caption text-secondary uppercase tracking-widest font-semibold">Center</span>
+        </div>
+      </div>
+      <button onclick="closeMobileMenu()" class="w-9 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high flex items-center justify-center transition-colors">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-2 mt-6">
+      <a href="#hero" onclick="closeMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">home</span> Beranda
+      </a>
+      <a href="#tentang-kami" onclick="closeMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">info</span> Tentang Kami
+      </a>
+      <a href="#fasilitas-dan-layanan" onclick="closeMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">sports_soccer</span> Fasilitas &amp; Layanan
+      </a>
+      <a href="#berita" onclick="closeMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">newspaper</span> Berita &amp; Artikel
+      </a>
+      <a href="#kontak" onclick="closeMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">contact_support</span> Kontak &amp; Lokasi
+      </a>
+    </nav>
+
+    <div class="mt-auto pt-6 border-t border-outline-variant/40 flex flex-col gap-3">
+      <button onclick="closeMobileMenu(); openModal('modal-login')" class="w-full py-3 rounded-xl bg-surface-container text-primary font-label-lg text-label-lg hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-lg">login</span> Masuk Portal
+      </button>
+      <button onclick="closeMobileMenu(); openModal('modal-booking')" class="w-full py-3 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow hover:bg-primary transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-lg">calendar_month</span> Booking Lapangan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MINI PAGE / MODAL: DETAIL AKTIVITAS EKSKUL ==================== -->
+<div id="modal-activity" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-activity')">
+  <div class="modal-box">
+    <!-- Activity Header Banner -->
+    <div class="relative h-60 overflow-hidden">
+      <img id="activity-modal-img" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="" alt="Detail Aktivitas">
+      <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/30 to-transparent"></div>
+      <button onclick="closeModal('modal-activity')" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/80 backdrop-blur-md text-on-surface hover:bg-surface flex items-center justify-center transition-transform hover:rotate-90">
+        <span class="material-symbols-outlined text-xl">close</span>
+      </button>
+      <div class="absolute bottom-4 left-6 right-6">
+        <span id="activity-modal-badge" class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption font-bold inline-block mb-1">Ekskul Olahraga</span>
+        <h3 id="activity-modal-title" class="font-headline-md text-headline-md text-inverse-on-surface font-extrabold leading-tight">Nama Aktivitas</h3>
+      </div>
+    </div>
+
+    <!-- Activity Body Content -->
+    <div class="p-6 lg:p-8 flex flex-col gap-space-md">
+      <div>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold mb-1">Tentang Program</h4>
+        <p id="activity-modal-desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Penjelasan lengkap seputar program ekskul dan pembinaan fisik santri di IDN Sport Center.</p>
+      </div>
+
+      <!-- Quick specs grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30">
+        <div>
+          <span class="font-caption text-caption text-on-surface-variant block">Jadwal Latihan</span>
+          <span id="activity-modal-schedule" class="font-label-lg text-label-lg text-primary font-bold">Rabu &amp; Sabtu</span>
+        </div>
+        <div>
+          <span class="font-caption text-caption text-on-surface-variant block">Pelatih</span>
+          <span id="activity-modal-coach" class="font-label-lg text-label-lg text-primary font-bold">Lisensi Nasional</span>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <span class="font-caption text-caption text-on-surface-variant block">Peserta</span>
+          <span id="activity-modal-target" class="font-label-lg text-label-lg text-secondary font-bold">Santri IDN</span>
+        </div>
+      </div>
+
+      <!-- Key Curriculum Points -->
+      <div>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold mb-2">Kurikulum &amp; Materi Latihan</h4>
+        <ul id="activity-modal-points" class="space-y-2 text-body-md text-on-surface-variant">
+          <!-- Injected dynamically -->
+        </ul>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="pt-4 border-t border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span class="font-caption text-caption text-on-surface-variant">Ingin sparring atau mendaftar? Hubungi kami langsung.</span>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="closeModal('modal-activity')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors">Tutup</button>
+          <a id="activity-modal-action-btn" href="#" target="_blank" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow hover:bg-primary transition-all flex items-center justify-center gap-2">
+            <span>Daftar / Info WA</span>
+            <span class="material-symbols-outlined text-sm">chat</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MINI PAGE / MODAL: BOOKING LAPANGAN ==================== -->
+<div id="modal-booking" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-booking')">
+  <div class="modal-box">
+    <div class="p-6 lg:p-8 flex flex-col gap-space-md">
+      <div class="flex items-center justify-between border-b border-outline-variant/40 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl">calendar_month</span>
+          </div>
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Booking Lapangan</h3>
+            <p class="font-caption text-caption text-on-surface-variant">Pemesanan lapangan olahraga IDN Boarding School</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-booking')" class="w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+
+      <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="flex flex-col gap-4">
+        <!-- Field Type Selection -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-md text-label-md text-on-surface font-semibold">Pilih Lapangan / Fasilitas</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <label class="cursor-pointer">
+              <input type="radio" name="court" value="Basketball Indoor Maple Court" class="peer hidden" checked>
+              <div class="p-3 rounded-xl border border-outline-variant peer-checked:border-primary-container peer-checked:bg-surface-container transition-all flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-primary text-xl">sports_basketball</span>
+                <div>
+                  <span class="font-title-md text-title-md font-bold block leading-tight">Basketball Indoor</span>
+                  <span class="font-caption text-caption text-on-surface-variant">Lantai Kayu Maple</span>
+                </div>
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="court" value="Futsal Rumput Sintetis Standard" class="peer hidden">
+              <div class="p-3 rounded-xl border border-outline-variant peer-checked:border-primary-container peer-checked:bg-surface-container transition-all flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-secondary text-xl">sports_soccer</span>
+                <div>
+                  <span class="font-title-md text-title-md font-bold block leading-tight">Futsal Sintetis</span>
+                  <span class="font-caption text-caption text-on-surface-variant">Bantalan Shock-Absorber</span>
+                </div>
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="court" value="Badminton Court Indoor" class="peer hidden">
+              <div class="p-3 rounded-xl border border-outline-variant peer-checked:border-primary-container peer-checked:bg-surface-container transition-all flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-tertiary text-xl">sports_tennis</span>
+                <div>
+                  <span class="font-title-md text-title-md font-bold block leading-tight">Badminton Court</span>
+                  <span class="font-caption text-caption text-on-surface-variant">Lantai Standar BWF</span>
+                </div>
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="court" value="Arena Serba Guna / Sparring Event" class="peer hidden">
+              <div class="p-3 rounded-xl border border-outline-variant peer-checked:border-primary-container peer-checked:bg-surface-container transition-all flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-primary text-xl">emoji_events</span>
+                <div>
+                  <span class="font-title-md text-title-md font-bold block leading-tight">Arena Sparring Event</span>
+                  <span class="font-caption text-caption text-on-surface-variant">Tribun 300 Penonton</span>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Date & Time Slot -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1">
+            <label class="font-label-md text-label-md text-on-surface font-semibold">Tanggal Pemakaian</label>
+            <input type="date" required id="booking-date" class="h-11 px-3 rounded-xl bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="font-label-md text-label-md text-on-surface font-semibold">Slot Waktu</label>
+            <select id="booking-slot" class="h-11 px-3 rounded-xl bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md">
+              <option value="08:00 - 10:00 WIB (Pagi)">08:00 - 10:00 WIB (Pagi)</option>
+              <option value="10:00 - 12:00 WIB (Siang)">10:00 - 12:00 WIB (Siang)</option>
+              <option value="14:00 - 16:00 WIB (Sore Awal)">14:00 - 16:00 WIB (Sore Awal)</option>
+              <option value="16:00 - 18:00 WIB (Sore Utama)" selected>16:00 - 18:00 WIB (Sore Utama)</option>
+              <option value="19:30 - 21:30 WIB (Malam)">19:30 - 21:30 WIB (Malam)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Name & WhatsApp -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1">
+            <label class="font-label-md text-label-md text-on-surface font-semibold">Nama Pemesan / Tim</label>
+            <input type="text" id="booking-name" placeholder="Contoh: Ahmad / Tim Futsal Al-Fatih" required class="h-11 px-3 rounded-xl bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="font-label-md text-label-md text-on-surface font-semibold">Nomor WhatsApp Aktif</label>
+            <input type="tel" id="booking-phone" placeholder="0812xxxxxxxx" required class="h-11 px-3 rounded-xl bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full mt-2 h-12 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95">
+          <span>Konfirmasi &amp; Lanjut ke WhatsApp</span>
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MINI PAGE / MODAL: PORTAL MASUK (LOGIN) ==================== -->
+<div id="modal-login" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-login')">
+  <div class="modal-box max-w-md">
+    <div class="p-6 lg:p-8 flex flex-col gap-space-md">
+      <div class="flex items-center justify-between border-b border-outline-variant/40 pb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl">lock</span>
+          </div>
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Portal Santri &amp; Anggota</h3>
+            <p class="font-caption text-caption text-on-surface-variant">IDN Boarding School Sport System</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-login')" class="w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="flex rounded-xl bg-surface-container-low p-1 gap-1">
+        <button type="button" onclick="switchLoginRole('santri', this)" class="login-tab-btn flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-md text-label-md text-primary font-bold shadow-sm transition-all">Santri</button>
+        <button type="button" onclick="switchLoginRole('wali', this)" class="login-tab-btn flex-1 py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-all">Wali Santri</button>
+        <button type="button" onclick="switchLoginRole('pelatih', this)" class="login-tab-btn flex-1 py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-all">Pelatih</button>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="flex flex-col gap-3">
+        <div class="flex flex-col gap-1">
+          <label id="login-identifier-label" class="font-label-md text-label-md text-on-surface font-semibold">Nomor Induk Santri (NIS)</label>
+          <input type="text" id="login-user" required placeholder="Masukkan NIS Anda" class="h-11 px-3 rounded-xl bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md">
+        </div>
+        <div class="flex flex-col gap-1">
+          <div class="flex justify-between items-center">
+            <label class="font-label-md text-label-md text-on-surface font-semibold">Kata Sandi</label>
+            <a href="#" onclick="showToast('Silakan hubungi pembina asrama untuk reset kata sandi.')" class="font-caption text-caption text-primary hover:underline">Lupa sandi?</a>
+          </div>
+          <input type="password" id="login-pass" required placeholder="••••••••" class="h-11 px-3 rounded-xl bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md">
+        </div>
+
+        <button type="submit" class="w-full mt-2 h-11 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow hover:bg-primary transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95">
+          <span>Masuk Sekarang</span>
+          <span class="material-symbols-outlined text-lg">login</span>
+        </button>
+      </form>
+
+      <p class="font-caption text-caption text-on-surface-variant text-center pt-2">
+        Belum terdaftar sebagai anggota ekskul? <a href="#kontak" onclick="closeModal('modal-login')" class="text-primary font-semibold hover:underline">Daftar lewat kontak</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MINI PAGE / MODAL: DETAIL BERITA ==================== -->
+<div id="modal-article" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-article')">
+  <div class="modal-box">
+    <div class="relative h-64 overflow-hidden">
+      <img id="article-modal-img" class="w-full h-full object-cover" src="" alt="Thumbnail Berita">
+      <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-transparent to-transparent"></div>
+      <button onclick="closeModal('modal-article')" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/80 backdrop-blur-md text-on-surface hover:bg-surface flex items-center justify-center transition-transform hover:rotate-90">
+        <span class="material-symbols-outlined text-xl">close</span>
+      </button>
+      <div class="absolute bottom-4 left-6 right-6">
+        <span id="article-modal-tag" class="px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary font-caption text-caption font-bold mb-1 inline-block">Kategori</span>
+        <h3 id="article-modal-title" class="font-headline-sm text-headline-sm text-inverse-on-surface font-extrabold leading-tight">Judul Artikel Lengkap</h3>
+      </div>
+    </div>
+
+    <div class="p-6 lg:p-8 flex flex-col gap-space-md">
+      <div class="flex items-center gap-2 text-on-surface-variant font-caption text-caption">
+        <span class="material-symbols-outlined text-sm">calendar_today</span>
+        <span id="article-modal-date">18 Mei 2025</span>
+        <span>•</span>
+        <span id="article-modal-author">Redaksi IDN Sport Center</span>
+      </div>
+
+      <div id="article-modal-content" class="font-body-md text-body-md text-on-surface leading-relaxed flex flex-col gap-3">
+        <!-- Content injected here -->
+      </div>
+
+      <div class="pt-4 border-t border-outline-variant/40 flex justify-end">
+        <button onclick="closeModal('modal-article')" class="px-5 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow hover:bg-primary transition-all">Selesai Membaca</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MINI PAGE / MODAL: KEBIJAKAN PRIVASI ==================== -->
+<div id="modal-privasi" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-privasi')">
+  <div class="modal-box">
+    <div class="p-6 lg:p-8 flex flex-col gap-space-md">
+      <div class="flex items-center justify-between border-b border-outline-variant/40 pb-4">
+        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Kebijakan Privasi</h3>
+        <button onclick="closeModal('modal-privasi')" class="w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+      <div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+        <p>IDN Boarding School Sport Center berkomitmen menjaga kerahasiaan dan privasi data santri, wali santri, pelatih, serta pengunjung fasilitas olahraga kami.</p>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold">1. Informasi yang Kami Kumpulkan</h4>
+        <p>Data pribadi yang dikumpulkan melalui situs ini (seperti formulir tanya kegiatan atau booking lapangan) mencakup nama, nomor kontak WhatsApp, dan keterangan pemesanan/sparring.</p>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold">2. Penggunaan Informasi</h4>
+        <p>Informasi tersebut semata-mata dimanfaatkan untuk konfirmasi jadwal pemakaian arena, koordinasi pertandingan persahabatan, serta komunikasi resmi program kegiatan santri.</p>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold">3. Keamanan Data</h4>
+        <p>Kami tidak akan membagikan data pribadi Anda kepada pihak ketiga manapun tanpa izin tertulis, kecuali diwajibkan oleh ketentuan hukum yang berlaku.</p>
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeModal('modal-privasi')" class="px-5 py-2 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md">Saya Mengerti</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MINI PAGE / MODAL: SYARAT & KETENTUAN ==================== -->
+<div id="modal-syarat" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-syarat')">
+  <div class="modal-box">
+    <div class="p-6 lg:p-8 flex flex-col gap-space-md">
+      <div class="flex items-center justify-between border-b border-outline-variant/40 pb-4">
+        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Syarat &amp; Ketentuan Arena</h3>
+        <button onclick="closeModal('modal-syarat')" class="w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+      <div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+        <h4 class="font-title-md text-title-md text-on-surface font-bold">1. Ketertiban &amp; Adab Islami</h4>
+        <p>Setiap santri dan tamu arena wajib menjaga adab pergaulan islami, menutup aurat sesuai syariat, menjaga kebersihan, dan saling menghormati sportivitas olahraga.</p>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold">2. Penggunaan Sepatu Khusus</h4>
+        <p>Pengguna lapangan basket kayu maple wajib mengenakan sepatu non-marking sol karet bersih. Lapangan futsal sintetis wajib mengenakan sepatu futsal bertelapak karet/turf.</p>
+        <h4 class="font-title-md text-title-md text-on-surface font-bold">3. Waktu Pemakaian &amp; Pembatalan</h4>
+        <p>Pemesanan lapangan dan kegiatan sparring harus dikonfirmasi minimal 1x24 jam sebelum jadwal pertandingan dimulai.</p>
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeModal('modal-syarat')" class="px-5 py-2 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FLOATING TOAST NOTIFICATION ==================== -->
+<div id="toast-notification" class="bg-inverse-surface text-inverse-on-surface px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-outline-variant/30 max-w-sm">
+  <span class="material-symbols-outlined text-secondary-container text-2xl">check_circle</span>
+  <span id="toast-message" class="font-body-md text-body-md">Pesan berhasil dikirim!</span>
+</div>
+
+<!-- ==================== INTERACTIVE JAVASCRIPT LOGIC ==================== -->
+<script>
+// ---------- Modal Controller ----------
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+    closeMobileMenu();
+    document.body.style.overflow = '';
+  }
+});
+
+// ---------- Mobile Drawer Controller ----------
+function openMobileMenu() {
+  const overlay = document.getElementById('mobile-drawer-overlay');
+  if (overlay) {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  const overlay = document.getElementById('mobile-drawer-overlay');
+  if (overlay) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// ---------- Toast Notification System ----------
+let toastTimer = null;
+function showToast(message) {
+  const toast = document.getElementById('toast-notification');
+  const msgEl = document.getElementById('toast-message');
+  if (toast && msgEl) {
+    msgEl.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4000);
+  }
+}
+
+// ---------- Dark/Light Mode Toggle with Persistence ----------
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  showToast(isDark ? 'Mode Gelap Aktif 🌙' : 'Mode Terang Aktif ☀️');
+}
+
+// Check saved theme
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+
+// ---------- Activity Modal Data & Viewer ----------
+const activityData = {
+  basketball: {
+    title: 'Basketball Club (#1 Most Popular)',
+    badge: 'Cabang Terfavorit',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCbMqpQ3VKp681sR38JzULTurLPuQGFNOcMsNfS1Yea3mKr7sOE1lueQ9WeHr_je7Rhxd7s3Q-2UjHMYyomT4K0OcG26Zk5x4BFCGhYC7GLLvBv_8rHw_Xo1JweHSKGEBPBQVpavGrRmO8TyBDdGnZYUkuBHCgeqm2JtzYJmOYEJXIWJAFXFV9Am2I6YIz-3kLOd9cb6XOi5mGkqknKdOtHZpjhHdVdmm5iStdKTiA',
+    desc: 'Ekskul basket santri IDN Boarding School dirancang untuk melatih kelincahan, akurasi tembakan, visi permainan, serta kerjasama tim berkecepatan tinggi di lapangan maple berstandar internasional.',
+    schedule: 'Rabu & Sabtu (16:00 - 17:45 WIB)',
+    coach: 'Pelatih Berlisensi PERBASI',
+    target: 'Santri SMP & SMK IDN',
+    points: [
+      'Fundamental dribbling, passing, crossover, dan lay-up drill presisi.',
+      'Sistem pertahanan zona (Zone Defense) & transisi serangan balik cepat (Fastbreak).',
+      'Laga uji coba berkala (Sparring Match) dengan sekolah/pesantren se-Jabodetabek.',
+      'Sesi analisis rekaman video taktik dan statistik efisiensi individu tiap santri.'
+    ],
+    waQuery: 'Halo Admin IDN Sport, saya ingin tahu informasi jadwal dan pendaftaran Basketball Club.'
+  },
+  futsal: {
+    title: 'Futsal & Mini Soccer Club (#2)',
+    badge: 'Liga Antar-Santri',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdgB5rcr3A_T9_Fj05yeVrivmyuAbuZCZ3HunXfuMoXzPFWRz7WLpcPXP_ZrHF8AcjbVtYjM6cAnQju3aVx-D7FSn9sHS4XVIuAHTIgSb1ipAoO3DggX5Hqw-mc6YQL0XArPYosbw3gRN7maigaL7LxyTovwOCjCbXay5WF5wRsLOMvNL7l0lC0TpafhFDjg8rgME4hNUdzgE4rnDRhXheqdGUiKRCSED7ErVyc-0',
+    desc: 'Pelatihan futsal intensif di atas 2 lapangan rumput sintetis premium bersertifikasi standar kompetisi resmi, dilengkapi bantalan peredam kejut untuk keselamatan sendi santri.',
+    schedule: 'Senin & Kamis (16:00 - 17:45 WIB)',
+    coach: 'Pelatih Berlisensi AFC Futsal',
+    target: 'Santri Semua Angkatan',
+    points: [
+      'Penguasaan kontrol bola sol sepatu (sole control), pivot movement, dan rotasi 3-1 & 4-0.',
+      'Simulasi set-piece tendangan sudut dan power-play skema taktik modern.',
+      'Penyelenggaraan Liga Internal IDN Futsal Championship setiap akhir semester.',
+      'Pendidikan karakter sportivitas tinggi dan adab islami di dalam dan luar lapangan.'
+    ],
+    waQuery: 'Halo Admin IDN Sport, saya ingin menanyakan info pendaftaran atau sparring untuk Futsal Club.'
+  },
+  badminton: {
+    title: 'Badminton Club (#3)',
+    badge: 'Prestasi Bulutangkis',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDhRWThOsROczVF03cWhGgHIdbKSUQOio6uT3D6VlBY5E68vg3m9rcSEYvzlNl0JiilPbaBE09bmO_pFxvsogOqceBOEPUdZsDRRBo4jB6idkvAiUJx7HL4dtwK8A5jQ-o61PcqQ5hg6AWqPb9G7teTBZAM8V4D5DTT1oJsE-VlWchkjy8Qkw72ZD7hpLr2f6a-1wQFkoRmE8s_G8Mj3xEWf8C6wmN1zwMfsWzG4a8',
+    desc: 'Pembinaan olahraga bulutangkis santri di lapangan tertutup berventilasi sejuk dengan karpet vinyl standar BWF serta pencahayaan LED 750 lux anti-silau.',
+    schedule: 'Rabu & Sabtu (06:00 - 08:00 WIB)',
+    coach: 'Pelatih Eks-Atlet Nasional',
+    target: '80+ Santri Terdaftar',
+    points: [
+      'Footwork agilitas 6 penjuru lapangan untuk kecepatan respons kok.',
+      'Teknik servis variatif, netting tipis, dropshot menyilang, dan jumping smash.',
+      'Kategori ganda (Men Doubles) dan tunggal (Single) dengan kurikulum berjenjang.',
+      'Seleksi tim perwakilan IDN Boarding School untuk ajang POSPEDA & O2SN.'
+    ],
+    waQuery: 'Halo Admin IDN Sport, mohon informasi seputar pendaftaran Badminton Club santri.'
+  },
+  akademi: {
+    title: 'Akademi Olahraga Santri (Youth Development)',
+    badge: 'Program Pembinaan Usia 8-18',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSSV_MPlznBr7Dn5x1fUGQNsAsoBN4nDyz3ujYdb9xGLdRzNAqmXJkXq0gb99eRCZxYHxUFkxYFIPYDlRfekUxkD3VYEjel7o9UC1OPY7uJ-ILLkaj2c08cSyqZ4k5yFoS99ZcLubNVvBHwo-hiLv2AFXPcq-zt2HsY_9NUeHRjIwB21Ast5sq6NzRKpzYFL2xLHGMn6gm6cYPA2Lh4T-ykgfTRJ8gWOJwIwRrQ38',
+    desc: 'Inkubator pembinaan atlet muda terpadu bagi santri IDN yang memiliki bakat khusus dalam cabang olahraga. Mengombinasikan ilmu sport science modern dengan pondasi akhlak karimah.',
+    schedule: 'Senin s/d Jumat (Jadwal Khusus)',
+    coach: 'Tim Pelatih Gabungan',
+    target: 'Santri Berbakat Terpilih',
+    points: [
+      'Asesmen fisik berkala: VO2Max, ketangkasan, kekuatan otot, dan kelenturan.',
+      'Konsultasi gizi atlet dan pemulihan stamina pasca-latihan berat.',
+      'Multi-disiplin: futsal, basket, panahan tradisional (sunnah), renang, dan atletik.',
+      'Pendampingan mental tanding (sport psychology) agar santri siap juara.'
+    ],
+    waQuery: 'Halo Admin IDN Sport, saya ingin berkonsultasi mengenai Akademi Olahraga Santri IDN.'
+  },
+  turnamen: {
+    title: 'Laga & Turnamen Antar-Santri (IDN Cup)',
+    badge: 'Jadwal Agenda Semester',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdgB5rcr3A_T9_Fj05yeVrivmyuAbuZCZ3HunXfuMoXzPFWRz7WLpcPXP_ZrHF8AcjbVtYjM6cAnQju3aVx-D7FSn9sHS4XVIuAHTIgSb1ipAoO3DggX5Hqw-mc6YQL0XArPYosbw3gRN7maigaL7LxyTovwOCjCbXay5WF5wRsLOMvNL7l0lC0TpafhFDjg8rgME4hNUdzgE4rnDRhXheqdGUiKRCSED7ErVyc-0',
+    desc: 'Agenda kejuaraan berkala di lingkungan IDN Boarding School yang mempertandingkan antar-angkatan santri serta membuka kesempatan sparring partner bagi sekolah/pesantren mitra.',
+    schedule: 'Setiap Akhir Semester & Hari Besar',
+    coach: 'Panitia Turnamen IDN Sport',
+    target: 'Terbuka Antar-Sekolah',
+    points: [
+      'Piala Bergilir Direktur IDN Boarding School untuk angkatan terbaik.',
+      'Sistem kompetisi grup dilanjutkan fase gugur dengan wasit bersertifikat.',
+      'Fasilitas live broadcast streaming & liputan dokumentasi media santri.',
+      'Terbuka undangan Friendly Match / Sparring dari sekolah mitra di Jawa Barat.'
+    ],
+    waQuery: 'Halo Panitia IDN Sport Center, sekolah/pesantren kami ingin mengajak sparring friendly match.'
+  },
+  komunitas: {
+    title: 'Klub Hobi & Komunitas Olahraga Santri',
+    badge: 'Kebugaran & Gaya Hidup Sehat',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSSV_MPlznBr7Dn5x1fUGQNsAsoBN4nDyz3ujYdb9xGLdRzNAqmXJkXq0gb99eRCZxYHxUFkxYFIPYDlRfekUxkD3VYEjel7o9UC1OPY7uJ-ILLkaj2c08cSyqZ4k5yFoS99ZcLubNVvBHwo-hiLv2AFXPcq-zt2HsY_9NUeHRjIwB21Ast5sq6NzRKpzYFL2xLHGMn6gm6cYPA2Lh4T-ykgfTRJ8gWOJwIwRrQ38',
+    desc: 'Wadah bagi santri yang ingin menyalurkan minat olahraga rekreatif di luar jam belajar formal di bawah bimbingan pembina asrama untuk menjaga kebugaran jasmani.',
+    schedule: 'Akhir Pekan (Sabtu & Ahad Pagi)',
+    coach: 'Pembina Olahraga Asrama',
+    target: 'Seluruh Santri IDN',
+    points: [
+      'Klub Lari Pagi (Morning Jogging) menyusuri panorama asri Jonggol.',
+      'Komunitas Calisthenics & Bodyweight Training untuk melatih kekuatan otot.',
+      'Klub Tenis Meja dan olahraga rekreasi ringan santri di waktu senggang.',
+      'Bela Diri Pencak Silat dan Taekwondo santri untuk ketangkasan membela diri.'
+    ],
+    waQuery: 'Halo Admin IDN Sport, saya ingin mengetahui lebih lanjut mengenai klub hobi santri.'
+  }
+};
+
+function showActivityModal(key) {
+  const data = activityData[key];
+  if (!data) return;
+
+  document.getElementById('activity-modal-title').textContent = data.title;
+  document.getElementById('activity-modal-badge').textContent = data.badge;
+  document.getElementById('activity-modal-img').src = data.img;
+  document.getElementById('activity-modal-desc').textContent = data.desc;
+  document.getElementById('activity-modal-schedule').textContent = data.schedule;
+  document.getElementById('activity-modal-coach').textContent = data.coach;
+  document.getElementById('activity-modal-target').textContent = data.target;
+
+  const pointsList = document.getElementById('activity-modal-points');
+  pointsList.innerHTML = '';
+  data.points.forEach(pt => {
+    const li = document.createElement('li');
+    li.className = 'flex items-start gap-2';
+    li.innerHTML = '<span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><span>' + pt + '</span>';
+    pointsList.appendChild(li);
+  });
+
+  const actionBtn = document.getElementById('activity-modal-action-btn');
+  actionBtn.href = 'https://wa.me/6281234567890?text=' + encodeURIComponent(data.waQuery);
+
+  openModal('modal-activity');
+}
+
+// ---------- Article Modal Data & Viewer ----------
+const articleData = {
+  'artikel-1': {
+    title: 'Independence Day Competition: Semarak Turnamen Kemerdekaan Santri IDN',
+    tag: 'Turnamen Santri',
+    date: '18 Mei 2025',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdgB5rcr3A_T9_Fj05yeVrivmyuAbuZCZ3HunXfuMoXzPFWRz7WLpcPXP_ZrHF8AcjbVtYjM6cAnQju3aVx-D7FSn9sHS4XVIuAHTIgSb1ipAoO3DggX5Hqw-mc6YQL0XArPYosbw3gRN7maigaL7LxyTovwOCjCbXay5WF5wRsLOMvNL7l0lC0TpafhFDjg8rgME4hNUdzgE4rnDRhXheqdGUiKRCSED7ErVyc-0',
+    content: [
+      'Semarak kemerdekaan terasa begitu meriah di IDN Boarding School Jonggol melalui gelaran Independence Day Competition 2025. Ratusan santri dari jenjang SMP dan SMK saling unjuk ketangkasan dalam laga olahraga penuh sportivitas tinggi.',
+      'Turnamen ini mempertandingkan 4 cabang utama: Liga Futsal 5 vs 5, Turnamen Basket 3-on-3, Laga Bulutangkis Ganda, serta Estafet Ketangkasan Fisik. Setiap laga dipimpin langsung oleh wasit bersertifikasi resmi demi menjaga kualitas kompetisi.',
+      '"Melalui kejuaraan ini, santri tidak hanya diasah fisiknya, tetapi juga dilatih kepemimpinannya, soliditas ukhuwah antar-teman, dan adab saling menghargai kemenangan maupun kekalahan," ungkap Kepala Program Olahraga IDN Boarding School.'
+    ]
+  },
+  'artikel-2': {
+    title: 'Student Group Activities: Menjaga Kebugaran & Karakter Kebersamaan Santri',
+    tag: 'Kesehatan & Karakter',
+    date: '12 Mei 2025',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYljHDtahjToap1Q7Rv9z1BFopJSLKazLhcfU7nzucBaoraNr0rkCa6pvOv7JndT60BVArQ8w_SniKspI4O28bCGhqyBE1WEvOzFs2IaX_Lt2igeKSFTJjuwLZnSkBQ2Cyl-sN5KFPANZXev5kuY7hF4OMddm70cpmQv9qisCUS671HERbyHCfbn18seWcEOfj8t8LvxYCnz6QfPLFxTiIOA3GAqv2a7OjAh8EWI8',
+    content: [
+      'Aktivitas pembinaan jasmani berkelompok di IDN Boarding School dirancang sebagai pelengkap gaya hidup santri penghafal Quran dan pegiat IT. Kebugaran fisik yang prima dipercaya meningkatkan fokus hafalan dan ketahanan belajar logika komputasi.',
+      'Sesi senam kebugaran, jogging pagi di sekeliling perbukitan Jonggol, serta latihan calisthenics ringan dilakukan secara teratur dengan pengawasan tim instruktur dan pembina asrama.',
+      'Selain kesehatan jantung dan otot, aktivitas kelompok ini terbukti merekatkan ikatan emosional positif antar-santri dari berbagai daerah di seluruh penjuru Indonesia.'
+    ]
+  },
+  'artikel-3': {
+    title: 'Pembaruan Fasilitas & Lapangan Baru di Lingkungan IDN Sport Area',
+    tag: 'Fasilitas & Arena',
+    date: '04 Mei 2025',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAEjnjwblIoxp7bzfT_IGA2v0g_9P4_W-96K9rqyIGZBlt3MSBkQ1JGfXsLMuSSMcpQLo7-1aOKzNgZCL-wWya-quuts0Z9dDFY8oCC9NMvi1BESG5bwI-Ps094JTHFE4uIrSxphhIEaQDkdcxO1cx5AXGfchtYtpfINjUtO0dDAbGAnprj5Z0H2sPm9fZ8XXUHV-NdnW9IVagIr0P9tbm3nQeYFVFe2Zsu6Dqb1zo',
+    content: [
+      'Guna mendukung antusiasme olahraga yang semakin pesat, manajemen IDN Boarding School meresmikan serangkaian pembaruan fasilitas olahraga di kawasan Jonggol, Bogor.',
+      'Peremajaan ini meliputi penggantian karpet lapangan bulutangkis dengan sertifikasi BWF, penambahan sistem pencahayaan LED hemat energi 750 lux anti-silau, serta instalasi jaring pengaman berdaya tahan tinggi di sekitar lapangan futsal.',
+      'Dengan perbaikan sarana ini, IDN Sport Area siap menjadi pusat kegiatan olahraga unggulan di wilayah timur Bogor sekaligus lokasi penyelenggaraan kompetisi antar-pesantren skala nasional.'
+    ]
+  }
+};
+
+function showArticleModal(key) {
+  const data = articleData[key];
+  if (!data) return;
+
+  document.getElementById('article-modal-title').textContent = data.title;
+  document.getElementById('article-modal-tag').textContent = data.tag;
+  document.getElementById('article-modal-date').textContent = data.date;
+  document.getElementById('article-modal-img').src = data.img;
+
+  const contentDiv = document.getElementById('article-modal-content');
+  contentDiv.innerHTML = '';
+  data.content.forEach(p => {
+    const pEl = document.createElement('p');
+    pEl.textContent = p;
+    contentDiv.appendChild(pEl);
+  });
+
+  openModal('modal-article');
+}
+
+// ---------- Facilities Real-time Filtering ----------
+function filterFacilities(category, btn) {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(b => {
+    b.className = 'filter-btn px-4 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container whitespace-nowrap transition-all duration-200 cursor-pointer';
+  });
+  btn.className = 'filter-btn px-4 py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm whitespace-nowrap transition-all duration-200 cursor-pointer';
+
+  const cards = document.querySelectorAll('.filter-card-item');
+  cards.forEach(card => {
+    const cardCat = card.getAttribute('data-category');
+    if (category === 'all' || cardCat === category) {
+      card.classList.remove('filter-card-hidden');
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0) scale(1)';
+      }, 50);
+    } else {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(15px) scale(0.95)';
+      setTimeout(() => {
+        card.classList.add('filter-card-hidden');
+      }, 250);
+    }
+  });
+}
+
+// ---------- Booking Form Handler ----------
+function handleBookingSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const courtEl = form.querySelector('input[name="court"]:checked');
+  const court = courtEl ? courtEl.value : 'Lapangan Olahraga';
+  const date = document.getElementById('booking-date').value;
+  const slot = document.getElementById('booking-slot').value;
+  const name = document.getElementById('booking-name').value;
+  const phone = document.getElementById('booking-phone').value;
+
+  const textMsg = `Halo IDN Sport Center,%0ASaya ingin konfirmasi booking lapangan:%0A• Lapangan: ${encodeURIComponent(court)}%0A• Tanggal: ${encodeURIComponent(date)}%0A• Waktu: ${encodeURIComponent(slot)}%0A• Nama: ${encodeURIComponent(name)}%0A• Nomor HP/WA: ${encodeURIComponent(phone)}`;
+
+  closeModal('modal-booking');
+  showToast('Mengarahkan ke WhatsApp untuk konfirmasi booking...');
+
+  setTimeout(() => {
+    window.open('https://wa.me/6281234567890?text=' + textMsg, '_blank');
+  }, 1000);
+}
+
+// ---------- Login Role Selector & Submit ----------
+function switchLoginRole(role, btn) {
+  const tabs = document.querySelectorAll('.login-tab-btn');
+  tabs.forEach(t => {
+    t.className = 'login-tab-btn flex-1 py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-all';
+  });
+  btn.className = 'login-tab-btn flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-md text-label-md text-primary font-bold shadow-sm transition-all';
+
+  const label = document.getElementById('login-identifier-label');
+  const user = document.getElementById('login-user');
+  if (role === 'santri') {
+    label.textContent = 'Nomor Induk Santri (NIS)';
+    user.placeholder = 'Contoh: 20241088';
+  } else if (role === 'wali') {
+    label.textContent = 'Nomor WhatsApp Terdaftar Wali Santri';
+    user.placeholder = '0812xxxxxxxx';
+  } else {
+    label.textContent = 'Username / NIP Pelatih';
+    user.placeholder = 'NIP atau Username';
+  }
+}
+
+function handleLoginSubmit(e) {
+  e.preventDefault();
+  const user = document.getElementById('login-user').value;
+  closeModal('modal-login');
+  showToast(`Selamat datang, ${user}! Berhasil masuk ke portal IDN Sport.`);
+}
+
+// ---------- Contact & Sparring Form Handler ----------
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">sync</span><span>Mengirim Pesan...</span>';
+
+  setTimeout(() => {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+    form.reset();
+    showToast('Terima kasih! Pesan & undangan sparring Anda telah terkirim.');
+  }, 1200);
+}
+
+// ---------- Active Nav Highlighting on Scroll ----------
+window.addEventListener('DOMContentLoaded', () => {
+  // Set default booking date to tomorrow
+  const dateInput = document.getElementById('booking-date');
+  if (dateInput) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.value = tomorrow.toISOString().split('T')[0];
+  }
+
+  // Counter animation on hero
+  const counters = document.querySelectorAll('.counter-value');
+  let animated = false;
+
+  function runCounters() {
+    if (animated) return;
+    animated = true;
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-target'));
+      const suffix = counter.getAttribute('data-suffix') || '';
+      let current = 0;
+      const step = Math.ceil(target / 30);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          counter.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          counter.textContent = current + suffix;
+        }
+      }, 35);
+    });
+  }
+
+  // IntersectionObserver for scroll animations
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.12
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        if (entry.target.querySelector('.counter-value')) {
+          runCounters();
+        }
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    observer.observe(el);
+  });
+
+  const heroSec = document.getElementById('hero');
+  if (heroSec) observer.observe(heroSec);
+
+  // Nav link active state watcher
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = ['hero', 'tentang-kami', 'fasilitas-dan-layanan', 'berita', 'kontak'];
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollPos = window.scrollY + 140;
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && scrollPos >= el.offsetTop) {
+        current = id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      if (link.getAttribute('data-section') === current) {
+        link.className = 'nav-link px-space-md py-space-sm transition-all bg-surface-container text-primary font-bold rounded-lg';
+      } else {
+        link.className = 'nav-link px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:text-on-surface hover:bg-surface-container-low transition-all';
+      }
+    });
+  });
+});
+</script>
+
+</body></html>
